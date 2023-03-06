@@ -1,54 +1,55 @@
-import SwiftUI
-
 struct ContentView: View {
-    @State var liczba1: Double = 0.0
-    @State var liczba2: Double = 0.0
-    @State var wynik: Any = 0
+    @State var liczba1: Int = 0
+    @State var liczba2: Int = 0
+    @State var wynik: Double? = nil
     
     var body: some View {
         VStack(alignment: .center) {
-            HStack {
-                Text("Podaj pierwszą liczbę rzeczywistą").foregroundColor(.gray)
+            HStack{
+                Text("Podaj pierwszą liczbę całkowitą").foregroundColor(.gray)
                 TextField("Liczba 1", text: Binding(
-                            get: { String(liczba1) },
-                            set: { liczba1 = Double($0) ?? 0.0 }
-                        ))
+                    get: { String(liczba1) },
+                    set: { liczba1 = Int($0) ?? 0 }
+                ))
             }
-            HStack {
-                Text("Podaj drugą liczbę rzeczywistą").foregroundColor(.gray)
+            HStack{
+                Text("Podaj drugą liczbę całkowitą").foregroundColor(.gray)
                 TextField("Liczba 2", text: Binding(
-                            get: { String(liczba2) },
-                            set: { liczba2 = Double($0) ?? 0.0 }
-                        ))
+                    get: { String(liczba2) },
+                    set: { liczba2 = Int($0) ?? 0 }
+                ))
             }
-            HStack {
+            HStack{
                 Button(action: {
-                    wynik = liczba2 + liczba1
+                    wynik = Double(liczba1 + liczba2)
                 }, label: {
                     Text("+").foregroundColor(.red)
                 })
                 Button(action: {
-                    wynik = liczba1 - liczba2
+                    wynik = Double(liczba1 - liczba2)
                 }, label: {
                     Text("-").foregroundColor(.red)
                 })
                 Button(action: {
-                    wynik = liczba1 * liczba2
+                    wynik = Double(liczba1 * liczba2)
                 }, label: {
                     Text("*").foregroundColor(.red)
                 })
                 Button(action: {
-                    if liczba2 != 0.0 {
-                        wynik = liczba1 / liczba2
-                    }
-                    else {
-                        wynik = "Nie dzielimy przez 0"
+                    if liczba2 != 0 {
+                        wynik = Double(liczba1) / Double(liczba2)
+                    } else {
+                        wynik = nil
                     }
                 }, label: {
                     Text("/").foregroundColor(.red)
                 })
             }
-            Text("Wynik: \(wynik)").padding()
+            if let wynik = wynik {
+                Text("Wynik: \(wynik)")
+            } else if liczba2 == 0 {
+                Text("Nie dzielimy przez 0!")
+            }
         }
         .padding()
     }
