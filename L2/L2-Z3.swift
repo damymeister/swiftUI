@@ -7,39 +7,41 @@ struct ContentView: View {
     @State var b3: Int = 0
     @State var wynik: String = ""
     var body: some View {
-        VStack(alignment: .center){
+        VStack(alignment: .center) {
             HStack{
-                Text("Podaj bok nr 1:")
+                Text("Podaj bok nr 1: ")
                 TextField("bok1", text: Binding(
                     get: {String(b1)},
                     set: {b1 = Int($0) ?? 0}
-                ))
+                )).frame(width: 60)
+                    .border(.black)
             }
             HStack{
-                Text("Podaj bok nr 2:")
+                Text("Podaj bok nr 2: ")
                 TextField("bok2", text: Binding(
                     get: {String(b2)},
                     set: {b2 = Int($0) ?? 0}
-                ))
+                )).frame(width: 60)
+                    .border(.black)
             }
             HStack{
-                Text("Podaj bok nr 3:")
+                Text("Podaj bok nr 3: ")
                 TextField("bok3", text: Binding(
                     get: {String(b3)},
                     set: {b3 = Int($0) ?? 0}
-                ))
+                )).frame(width: 60)
+                    .border(.black)
             }
             Button(action: {
-                if b1 + b2 > b3 && b2 + b3 > b1 && b1 + b3 > b2 {
-                    wynik = "Z tych bokow mozna zbudowac trojkat"
-                } else {
-                    wynik = "Z tych bokow nie mozna zbudowac trojkata"
-                }
-            }, label: {
-                Text("Trojkat").foregroundColor(.red)
-            })
-            
-            Text(wynik).foregroundColor(wynik.contains("Nie") ? .red : .green)
+                       if b1 + b2 > b3 && b2 + b3 > b1 && b1 + b3 > b2 {
+                           wynik = "Z tych bokow mozna zbudowac trojkat"
+                       } else {
+                           wynik = "Z tych bokow nie mozna zbudowac trojkata"
+                       }
+                   }, label: {
+                       Text("Trojkat").foregroundColor(.red)
+                   })
+            Text(wynik).foregroundColor(wynik.contains("nie") ? .red : .green)
             Text("Podano \(b1), \(b2), \(b3)").foregroundColor(.blue)
         }
         .padding()
@@ -51,3 +53,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
