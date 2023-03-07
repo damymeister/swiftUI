@@ -3,28 +3,30 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            Image("nazwa-zdjecia")
+        ZStack(alignment: .bottom){
+            Image("zubr")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-            
-            HStack {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Tytuł zdjęcia")
+            HStack(){
+                VStack(alignment: .leading) {
+                    Text("Zubr")
                         .font(.title)
                         .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                    Text("Autor zdjęcia")
+                        .foregroundColor(.green)
+                    Text("zdjecie")
                         .font(.subheadline)
-                        .foregroundColor(.primary)
+                        .foregroundColor(.green)
                 }
                 Spacer()
             }
             .padding()
-            .background(Color.primary.opacity(0.8))
-            .cornerRadius(10)
-            .padding(.horizontal)
-            .padding(.bottom)
+            .background(Color.white.opacity(0.5))
+            .border(.blue)
         }
+    }
+}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
