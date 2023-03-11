@@ -1,5 +1,5 @@
 import SwiftUI
-
+//do dokonczenia
 struct ContentView: View{
   @State var wybranyRozmiar: String = ""
   @State var wybranaFirma: String = ""
