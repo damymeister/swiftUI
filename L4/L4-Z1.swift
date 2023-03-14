@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  l1mat
-//
-//  Created by student on 14/03/2023.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -18,8 +11,10 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack{
-                Text("Kantor").foregroundColor(<#T##color: Color?##Color?#>)
-            }
+                Spacer()
+                Text("Kantor").foregroundColor(.white).font(.title)
+                Spacer()
+            }.background(.black)
             Spacer()
             HStack{
                 TextField("Ilosc waluty",
@@ -58,3 +53,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
