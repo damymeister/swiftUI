@@ -23,7 +23,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
 import SwiftUI
 
 struct Dom{
@@ -32,10 +31,11 @@ struct Dom{
     var liczbaPokoi: Int
     var wDzialki: Double
     var lPieter: Int
+    var zdjecie: Image?
 }
 struct FirstView: View {
-    @State var domy: [Dom] = [Dom(nazwa: "Dom 1", powierzchnia:200, liczbaPokoi: 5, wDzialki: 30.0, lPieter:2),
-                           Dom(nazwa: "Dom 2", powierzchnia:300, liczbaPokoi: 3, wDzialki: 20.0, lPieter: 4)]
+    @State var domy: [Dom] = [Dom(nazwa: "Dom 1", powierzchnia:200, liczbaPokoi: 5, wDzialki: 30.0, lPieter:2, zdjecie: Image("dom1")),
+                              Dom(nazwa: "Dom 2", powierzchnia:300, liczbaPokoi: 3, wDzialki: 20.0, lPieter: 4, zdjecie: Image("dom2"))]
     var body: some View {
             VStack{
                 List{
@@ -57,17 +57,19 @@ struct FirstView_Previews: PreviewProvider {
     }
 }
 
+import SwiftUI
 
 struct Mieszkanie{
     var nazwa: String
     var powierzchnia: Double
     var liczbaPokoi: Int
     var czyDwupoziom: Bool
+    var zdjecie: Image?
 }
 
 struct SecondView: View {
-    @State var mieszkania: [Mieszkanie] = [Mieszkanie(nazwa: "Mieszkanie 1", powierzchnia: 30, liczbaPokoi: 5, czyDwupoziom: true),
-                                    Mieszkanie(nazwa: "Mieszkanie 2", powierzchnia: 50, liczbaPokoi: 3, czyDwupoziom: false)
+    @State var mieszkania: [Mieszkanie] = [Mieszkanie(nazwa: "Mieszkanie 1", powierzchnia: 30, liczbaPokoi: 5, czyDwupoziom: true, zdjecie: Image("mieszkanie1")),
+                                           Mieszkanie(nazwa: "Mieszkanie 2", powierzchnia: 50, liczbaPokoi: 3, czyDwupoziom: false, zdjecie: Image("mieszkanie2"))
     ]
     var body: some View {
             VStack{
@@ -90,13 +92,15 @@ struct SecondView_Previews: PreviewProvider {
     }
 }
 
-
 import SwiftUI
 
 struct DomView: View {
     @Binding var dom : Dom
     var body: some View {
         VStack{
+            dom.zdjecie?
+                .resizable()
+                .scaledToFit()
             Text("Nazwa: " + dom.nazwa)
             Text("Powierzchnia: " + String(dom.powierzchnia))
             Text("Liczba pokoi: " + String(dom.liczbaPokoi))
@@ -108,7 +112,7 @@ struct DomView: View {
 
 struct DomView_Previews: PreviewProvider {
     static var previews: some View {
-        DomView(dom: .constant(Dom(nazwa: "", powierzchnia:0, liczbaPokoi: 0, wDzialki: 0, lPieter:0)))
+        DomView(dom: .constant(Dom(nazwa: "", powierzchnia:0, liczbaPokoi: 0, wDzialki: 0, lPieter:0, zdjecie: Image("dom2"))))
     }
 }
 
@@ -118,14 +122,22 @@ struct MieszkanieView: View {
     @Binding var mieszkanie : Mieszkanie
     var body: some View {
         VStack{
+            mieszkanie.zdjecie?
+                .resizable()
+                .scaledToFit()
             Text("Nazwa: " + mieszkanie.nazwa)
             Text("Powierzchnia: " + String(mieszkanie.powierzchnia))
             Text("Liczba pokoi: " + String(mieszkanie.liczbaPokoi))
         }
-    }}
+    }
+}
 
 struct MieszkanieView_Previews: PreviewProvider {
     static var previews: some View {
-        MieszkanieView(mieszkanie: .constant(Mieszkanie(nazwa: "", powierzchnia: 0, liczbaPokoi: 0, czyDwupoziom: true)))
+        MieszkanieView(mieszkanie: .constant(Mieszkanie(nazwa: "", powierzchnia: 0, liczbaPokoi: 0, czyDwupoziom: true, zdjecie: Image("mieszkanie2"))))
     }
 }
+
+
+
+
