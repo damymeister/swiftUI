@@ -10,15 +10,18 @@ struct ContentView: View {
         Car(brand:"Ferrari", model:"Enzo", logo:Image("ferrari")),
         Car(brand:"Bugatti", model:"Chiron", logo: Image("bugatti"))
     ]
+    @State var deleted: [Int] = []
     var body: some View {
         VStack {
             List{
                 ForEach(0..<auta.count){
-                    a in CarView(auto: $auta[a])
-                        .gesture(TapGesture()
-                            .onEnded(){
-                                auta.remove(at: a)
-                            })
+                    a in if(!deleted.contains(a)){
+                        CarView(auto: $auta[a])
+                            .gesture(TapGesture()
+                                .onEnded(){
+                                    deleted.append(a)
+                                })
+                    }
                 }
             }
         }
@@ -51,3 +54,4 @@ struct CarView_Previews: PreviewProvider {
         CarView(auto:. constant(Car(brand: "", model: "", logo:Image(""))))
     }
 }
+
