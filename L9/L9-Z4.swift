@@ -12,28 +12,32 @@ struct ContentView: View {
     ]
     @State var deleted: [Int] = []
     var body: some View {
-        VStack {
-            List{
-                ForEach(0..<auta.count){
-                    a in if(!deleted.contains(a)){
-                        CarView(auto: $auta[a])
-                            .gesture(TapGesture()
-                                .onEnded(){
+            VStack {
+                List {
+                    ForEach(0..<auta.count) {
+                        a in
+                        if (!deleted.contains(a)) {
+                            CarView(auto: $auta[a]).swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button(action: {
                                     deleted.append(a)
-                                })
+                                }) {
+                                    Image(systemName: "trash")
+                                }
+                            }
+                        }
                     }
                 }
             }
+            .padding()
         }
-        .padding()
     }
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
 import SwiftUI
 
 struct CarView: View {
